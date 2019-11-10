@@ -8,6 +8,7 @@ import {MatSidenavModule,MatToolbarModule,MatButtonModule,MatIconModule,MatGridL
 import { ToolbarComponent } from './toolbar/toolbar.component'
 
 import { LoginModule} from "./login/login.module";
+import { RegisterModule} from "./register/register.module";
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,12 +17,13 @@ import { LoginModule} from "./login/login.module";
   imports: [
     BrowserModule,
     AppRoutingModule,
+    LoginModule,
+    RegisterModule,
     BrowserAnimationsModule,
     MatSidenavModule,
     MatToolbarModule,
     MatButtonModule,MatIconModule,
     MatGridListModule,
-    LoginModule
   ],
   providers: [],
   bootstrap: [AppComponent]

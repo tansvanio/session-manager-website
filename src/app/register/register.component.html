@@ -1,0 +1,36 @@
+<div class=row>
+        <div class=col m4> </div>
+        <div class=col m4>
+            <mat-card id="register-card-container">
+                <h1>Register</h1>
+                <form class="register-form" [formGroup]="registerForm" (ngSubmit)="submitRegisterForm()">
+                    <div class=row>
+                        <mat-form-field class="col s12">
+                            <input type="email" matInput placeholder="Login with your email." formControlName="email">
+                            <mat-error *ngIf="registerForm.controls['email'].hasError('email')  && !loginForm.controls['email'].hasError('required')">
+                                    Please enter a valid email address
+                            </mat-error>
+                            <mat-error *ngIf="registerForm.controls['email'].hasError('required')">
+                                    Email is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class=row >
+                        <mat-form-field class="col s12">
+                            <input type="password" matInput placeholder="Your password" formControlName="password">
+                            <mat-error *ngIf="registerForm.controls['password'].hasError('required')">
+                                    Password is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
+                        <button mat-raised-button color="primary" class="col s6" >Login</button>
+                    </div>
+                    <div class="row">
+                            <a href="/register" routerLink="/Register" class="col s2">Register your account here!</a>
+                    </div>
+                </form>
+            </mat-card>
+        </div>
+        <div class=col m4> </div>
+    </div>
