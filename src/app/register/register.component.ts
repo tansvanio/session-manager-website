@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FormControl,FormGroup,Validators, FormGroupDirective, NgForm} from '@angular/forms';
+import { FormControl,FormGroup,Validators, FormGroupDirective, NgForm, AbstractControl, ValidatorFn} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
+import { match } from 'minimatch';
 
 @Component({
   selector: 'app-register',
@@ -9,10 +10,22 @@ import {ErrorStateMatcher} from '@angular/material/core';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  matchPasswords: ValidatorFn = (c: FormGroup) => {
+    let password : string = c.get("password").value;
+    let repeatPassword : string = c.get("password").value;
+    if(password.match(repeatPassword)) return null;
+    else return {noMatch: true}
+
+  };
+ 
   registerForm = new FormGroup({
     email: new FormControl('',[Validators.required,Validators.email]),
-    password: new FormControl('',[Validators.required]),
-  });
+    name: new FormControl("",[Validators.required]),
+    password: new FormControl('',[Validators.required,Validators.minLength(5)]),
+    repeatPassword: new FormControl('',[Validators.required]),
+    registrationKey: new FormControl('',[Validators.required]),
+  },[this.matchPasswords]);
+
   constructor() { }
 
   ngOnInit() {

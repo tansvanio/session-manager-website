@@ -5,8 +5,10 @@
                 <h1>Register</h1>
                 <form class="register-form" [formGroup]="registerForm" (ngSubmit)="submitRegisterForm()">
                     <div class=row>
+                        <mat-icon >email</mat-icon>
                         <mat-form-field class="col s12">
                             <input type="email" matInput placeholder="Login with your email." formControlName="email">
+                          
                             <mat-error *ngIf="registerForm.controls['email'].hasError('email')  && !loginForm.controls['email'].hasError('required')">
                                     Please enter a valid email address
                             </mat-error>
@@ -15,19 +17,48 @@
                             </mat-error>
                         </mat-form-field>
                     </div>
+                    <div class=row>
+                            <mat-icon >account_circle</mat-icon>
+                            <mat-form-field class="col s12">
+                                <input type="text" matInput placeholder="Your name / instituition." formControlName="name">
+                            </mat-form-field>
+                        </div>
                     <div class=row >
-                        <mat-form-field class="col s12">
+                        <mat-icon >security</mat-icon>
+                        <mat-form-field class="col s6">
                             <input type="password" matInput placeholder="Your password" formControlName="password">
+                            <mat-error *ngIf="registerForm.controls['password'].hasError('minlength') && !registerForm.controls['password'].hasError('required')">
+                                   Your password requires at least 5 characters.
+                            </mat-error>
                             <mat-error *ngIf="registerForm.controls['password'].hasError('required')">
                                     Password is <strong>required</strong>
                             </mat-error>
                         </mat-form-field>
+
+                        <mat-form-field class="col s6">
+                                <input type="password" matInput placeholder="Repeat your password" formControlName="repeatPassword">
+                                <mat-error *ngIf="registerForm.hasError('noMatch') && !registerForm.controls['repeatPassword'].hasError('required')">
+                                        Your passwords do not match.
+                                 </mat-error>
+                                <mat-error *ngIf="registerForm.controls['repeatPassword'].hasError('required')">
+                                        Please <strong>rewrite</strong> your password.
+                                </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class=row >
+                            <mat-icon >vpn_key</mat-icon>
+                            <mat-form-field class="col s12">
+                                    <input type="password" matInput placeholder="Registration key" formControlName="registrationKey">
+                                    <mat-error *ngIf="registerForm.controls['registrationKey'].hasError('required')">
+                                            Please <strong>write</strong> the key given to you by the administrator.
+                                    </mat-error>
+                            </mat-form-field>
+                        </div>
+                    <div class="row">
+                        <button mat-raised-button color="primary" class="col s6" >Register</button>
                     </div>
                     <div class="row">
-                        <button mat-raised-button color="primary" class="col s6" >Login</button>
-                    </div>
-                    <div class="row">
-                            <a href="/register" routerLink="/Register" class="col s2">Register your account here!</a>
+                            <a href="/login" routerLink="/login" class="col s2">Login with your account if you already have one.</a>
                     </div>
                 </form>
             </mat-card>
